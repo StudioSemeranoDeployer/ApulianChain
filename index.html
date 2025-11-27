@@ -4,244 +4,150 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ApulianChain | Innovation Network</title>
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     :root {
-      /* Palette "Deep Galaxy" */
       --bg-deep: #010108;
       --bg-surface: rgba(10, 12, 35, 0.7);
-      --bg-glass: rgba(255, 255, 255, 0.03);
-      
-      --primary: #00f3ff;    /* Electric Cyan */
-      --secondary: #bc13fe;  /* Neon Purple */
-      --tertiary: #fea013;   /* Solar Gold (Education) */
-      
+      --primary: #00f3ff;    
+      --secondary: #bc13fe;  
+      --tertiary: #fea013;   
       --text-main: #ffffff;
       --text-muted: #94a3b8;
-      
-      --border-light: rgba(255, 255, 255, 0.08);
-      --border-highlight: rgba(0, 243, 255, 0.3);
-      
+      --border-light: rgba(255, 255, 255, 0.1);
       --radius-lg: 24px;
-      --radius-md: 16px;
-      
-      --blur-strength: 20px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-deep);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(188, 19, 254, 0.15) 0, transparent 50%),
-        radial-gradient(circle at 85% 85%, rgba(0, 243, 255, 0.12) 0, transparent 50%);
+      background-image: radial-gradient(circle at 15% 15%, rgba(188, 19, 254, 0.15) 0, transparent 50%), 
+                        radial-gradient(circle at 85% 85%, rgba(0, 243, 255, 0.12) 0, transparent 50%);
       color: var(--text-main);
-      min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
     }
 
-    /* PRELOADER */
-    #preloader {
-      position: fixed; inset: 0; background: var(--bg-deep); z-index: 9999;
-      display: flex; justify-content: center; align-items: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    .loader-ring {
-      width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.1);
-      border-top-color: var(--primary); border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    /* UTILITIES */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
     /* HEADER */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(1, 1, 8, 0.7); backdrop-filter: blur(var(--blur-strength));
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(1, 1, 8, 0.85); backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--border-light); padding: 1rem 0;
     }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
     .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
     
-    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-    .brand-logo-box {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--secondary), #000);
-      border: 1px solid var(--border-highlight);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
-    }
-    .brand-text h1 { font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1; }
-    .brand-text span { font-size: 0.7rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; }
+    .brand { font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .brand span { color: var(--primary); }
 
     .nav-menu { display: flex; gap: 2rem; }
-    .nav-link {
-      color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-      transition: color 0.3s ease; position: relative;
-    }
-    .nav-link:hover { color: #fff; }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: 0.3s; }
+    .nav-link:hover { color: var(--primary); }
     
     .btn-nav {
-      padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-      text-decoration: none; color: var(--bg-deep); background: var(--primary);
-      box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); transition: transform 0.2s;
+      padding: 0.6rem 1.2rem; border-radius: 50px; background: var(--primary); color: #000;
+      text-decoration: none; font-weight: 700; transition: 0.3s; display: inline-block;
     }
-    .btn-nav:hover { transform: translateY(-2px); }
+    .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); }
 
-    /* HERO SECTION */
-    .hero { min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    /* HERO */
+    .hero { min-height: 85vh; display: flex; align-items: center; padding: 4rem 0; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.4rem 1rem; border-radius: 50px;
-      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-light);
-      font-size: 0.8rem; color: var(--primary); margin-bottom: 1.5rem;
-    }
-    .pulse-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem;
-    }
-    .typewriter { color: var(--secondary); border-right: 2px solid var(--secondary); animation: blink 0.7s infinite; }
-
-    .hero-actions { display: flex; gap: 1rem; margin-top: 2rem; }
-    .btn-primary {
-      padding: 1rem 2rem; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #0099ff);
-      color: #000; font-weight: 700; text-decoration: none; border: none; cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.25); transition: all 0.3s ease;
-    }
-    .btn-glass {
-      padding: 1rem 2rem; border-radius: 16px; background: rgba(255,255,255,0.05);
-      color: #fff; font-weight: 600; text-decoration: none; border: 1px solid var(--border-light);
-      backdrop-filter: blur(10px); transition: all 0.3s ease;
-    }
-    .btn-primary:hover, .btn-glass:hover { transform: translateY(-3px); }
-
-    /* MAP COMPONENT */
-    .map-container {
-      position: relative; width: 100%; aspect-ratio: 1/1.1;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 70%);
-      border: 1px solid var(--border-light); border-radius: 30px;
-      backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center;
-    }
-    .puglia-shape {
-      width: 80%; height: 90%;
-      background: url('img/puglia-galaxy.svg') no-repeat center center;
-      background-size: contain; position: relative;
-      filter: drop-shadow(0 0 15px rgba(188, 19, 254, 0.3));
-    }
-    .map-marker {
-      position: absolute; width: 16px; height: 16px; border-radius: 50%;
-      background: var(--primary); cursor: pointer; z-index: 10;
-      box-shadow: 0 0 0 4px rgba(0, 243, 255, 0.2); transition: all 0.3s;
-    }
-    .map-marker:hover { transform: scale(1.3); background: #fff; }
+    .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+    .typewriter { color: var(--secondary); border-right: 3px solid var(--secondary); padding-right: 5px; animation: blink 1s infinite; }
     
-    .marker-tooltip {
-      position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(10px);
-      background: rgba(0,0,0,0.9); border: 1px solid var(--border-highlight);
-      padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.75rem;
-      white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s;
+    /* MAP PLACEHOLDER (CSS ONLY if SVG missing) */
+    .map-box {
+      width: 100%; aspect-ratio: 1/1; border-radius: 30px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+      border: 1px solid var(--border-light);
+      position: relative; display: flex; align-items: center; justify-content: center;
     }
-    .map-marker:hover .marker-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .map-shape {
+      width: 70%; height: 80%; background: rgba(255,255,255,0.02); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 0.8rem; text-align: center; border: 2px dashed var(--border-light);
+    }
+    .map-point {
+      position: absolute; width: 14px; height: 14px; background: var(--primary); border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(0,243,255,0.2); cursor: pointer; transition: 0.3s;
+    }
+    .map-point:hover { transform: scale(1.3); background: #fff; }
+    .p-1 { top: 30%; left: 40%; } .p-2 { top: 50%; left: 60%; } .p-3 { top: 70%; left: 80%; }
 
-    .m-foggia { top: 20%; left: 30%; }
-    .m-bari { top: 45%; left: 60%; }
-    .m-taranto { top: 65%; left: 65%; }
-    .m-lecce { top: 80%; left: 88%; }
-
-    /* STATS SECTION */
+    /* STATS */
     .stats-row {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
-      margin: 4rem 0; padding: 3rem; background: var(--bg-glass);
-      border-radius: var(--radius-lg); border: 1px solid var(--border-light); text-align: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;
+      background: var(--bg-surface); padding: 3rem; border-radius: var(--radius-lg);
+      text-align: center; margin: 4rem 0; border: 1px solid var(--border-light);
     }
-    .stat-number { font-size: 2.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.5rem; }
-    .stat-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .stat-num { font-size: 2.5rem; font-weight: 800; color: #fff; display: block; }
+    .stat-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
 
-    /* TEAM CAROUSEL SECTION */
-    .team-scroll-wrapper {
-      display: flex; overflow-x: auto; gap: 2rem; padding: 2rem 0.5rem;
-      scroll-snap-type: x mandatory; scrollbar-width: none;
+    /* TEAM CAROUSEL */
+    .team-wrapper {
+      display: flex; overflow-x: auto; gap: 1.5rem; padding: 2rem 0.5rem;
+      scroll-snap-type: x mandatory; scrollbar-width: none; /* Firefox */
     }
-    .team-scroll-wrapper::-webkit-scrollbar { display: none; }
+    .team-wrapper::-webkit-scrollbar { display: none; } /* Chrome */
     
     .team-card {
-      flex: 0 0 260px; scroll-snap-align: center;
-      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg); overflow: hidden; transition: 0.3s;
+      flex: 0 0 280px; scroll-snap-align: center;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-light);
+      border-radius: 20px; overflow: hidden; transition: 0.3s;
     }
-    .team-card:hover { border-color: var(--secondary); transform: translateY(-5px); }
+    .team-card:hover { transform: translateY(-10px); border-color: var(--secondary); background: rgba(255,255,255,0.06); }
     
-    .team-img-box {
-      height: 260px; background: radial-gradient(circle at bottom, rgba(188, 19, 254, 0.2), transparent 70%);
-      display: flex; align-items: flex-end; justify-content: center; position: relative;
+    .team-img-area {
+      height: 280px; background: linear-gradient(to top, #000, transparent);
+      display: flex; align-items: flex-end; justify-content: center; overflow: hidden;
     }
-    /* Glow testa */
-    .team-img-box::before {
-      content: ''; position: absolute; width: 100px; height: 100px; background: var(--primary);
-      filter: blur(50px); opacity: 0.4; top: 40px; border-radius: 50%;
-    }
-    .team-img {
-      width: 100%; height: auto; object-fit: contain; position: relative; z-index: 2;
-      mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    }
+    .team-img { width: 100%; height: 100%; object-fit: cover; }
     
-    .team-info { padding: 1.5rem; text-align: center; position: relative; z-index: 5; }
-    .team-name { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
-    .team-role { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 1rem; }
+    .team-info { padding: 1.5rem; text-align: center; }
+    .team-role { color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.5rem; }
+    .team-social { display: flex; justify-content: center; gap: 10px; margin-top: 1rem; }
+    .social-icon {
+      width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;
+    }
+    .social-icon:hover { background: var(--primary); color: #000; }
+
+    /* ACADEMY */
+    .edu-section { padding: 4rem 0; }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .edu-card { background: rgba(20,20,30,0.6); padding: 2rem; border-radius: 20px; border: 1px solid rgba(254, 160, 19, 0.2); }
+    .edu-icon { color: var(--tertiary); font-size: 2rem; margin-bottom: 1rem; }
+
+    /* FORM */
+    .contact-box { max-width: 600px; margin: 0 auto; background: var(--bg-surface); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-light); }
+    .form-input { width: 100%; padding: 1rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-light); color: #fff; border-radius: 10px; }
     
-    .social-row { display: flex; justify-content: center; gap: 0.8rem; }
-    .social-btn { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
-    .social-btn:hover { color: #fff; background: var(--primary); }
-
-    /* ACADEMY SECTION */
-    .section-education { padding: 6rem 0; background: linear-gradient(to bottom, transparent, rgba(254, 160, 19, 0.05), transparent); }
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .edu-card { background: rgba(20, 20, 25, 0.6); border: 1px solid rgba(254, 160, 19, 0.2); padding: 2rem; border-radius: var(--radius-lg); }
-    .edu-icon { width: 50px; height: 50px; background: rgba(254, 160, 19, 0.2); color: var(--tertiary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
-
-    /* CONTACT FORM */
-    .form-box { background: var(--bg-surface); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light); max-width: 600px; margin: 0 auto; }
-    .form-input { width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-light); border-radius: 8px; color: #fff; margin-bottom: 1rem; }
-
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .nav-menu { display: none; }
-      .stats-row { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
     }
-
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
+    
     @keyframes blink { 50% { border-color: transparent; } }
   </style>
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div id="preloader"><div class="loader-ring"></div></div>
-
   <header>
     <div class="container nav-wrapper">
-      <a href="#" class="brand">
-        <div class="brand-logo-box"><span style="font-weight:800; color:#fff;">A</span></div>
-        <div class="brand-text"><h1>ApulianChain</h1><span>Network</span></div>
-      </a>
+      <a href="#" class="brand">Apulian<span>Chain</span></a>
       <nav class="nav-menu">
         <a href="#home" class="nav-link">Home</a>
-        <a href="#servizi" class="nav-link">Servizi</a>
         <a href="#academy" class="nav-link" style="color: var(--tertiary);">Academy</a>
         <a href="#team" class="nav-link">Team</a>
+        <a href="#contatti" class="nav-link">Contatti</a>
       </nav>
       <a href="#contatti" class="btn-nav">Unisciti</a>
     </div>
@@ -251,216 +157,256 @@
     <!-- HERO -->
     <section id="home" class="hero container">
       <div class="hero-grid">
-        <div class="hero-content reveal">
-          <div class="hero-badge"><span class="pulse-dot"></span>System Online</div>
-          <h2 class="hero-title">Il Futuro è <br><span class="typewriter" id="typing-text"></span></h2>
-          <p style="color: var(--text-muted); margin-bottom: 2rem;">Colleghiamo le menti migliori della Puglia con la Blockchain.</p>
-          <div class="hero-actions">
-            <a href="#team" class="btn-primary">Scopri il Team</a>
-            <a href="#academy" class="btn-glass">Corsi</a>
-          </div>
+        <div>
+          <div style="color:var(--primary); margin-bottom:1rem; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem;">● System Online</div>
+          <h1 class="hero-title">Il Futuro è <br><span class="typewriter" id="typing">Innovazione</span></h1>
+          <p style="color:var(--text-muted); margin-bottom:2rem; max-width:500px;">
+            Colleghiamo le menti migliori della Puglia con la Blockchain. Un ecosistema decentralizzato per il territorio.
+          </p>
+          <a href="#team" class="btn-nav">Esplora il Team</a>
         </div>
-        <div class="hero-map reveal">
-          <div class="map-container">
-            <div class="puglia-shape">
-              <!-- Punti Mappa -->
-              <div class="map-marker m-bari" data-city="Bari"><div class="marker-tooltip">HQ</div></div>
-              <div class="map-marker m-lecce" data-city="Lecce"><div class="marker-tooltip">Lab</div></div>
-              <div class="map-marker m-foggia" data-city="Foggia"><div class="marker-tooltip">Hub</div></div>
-              <div class="map-marker m-taranto" data-city="Taranto"><div class="marker-tooltip">Blue</div></div>
-            </div>
+        
+        <div class="map-box">
+          <!-- Mappa CSS fallback -->
+          <div class="map-shape">
+            <img src="img/puglia-galaxy.svg" alt="Mappa Puglia" style="max-width:100%; height:auto; display:none;" onload="this.style.display='block'; this.parentElement.style.background='transparent'; this.parentElement.style.border='none';">
+            <span>(Mappa Interattiva)</span>
           </div>
+          <div class="map-point p-1" title="Foggia"></div>
+          <div class="map-point p-2" title="Bari"></div>
+          <div class="map-point p-3" title="Lecce"></div>
         </div>
       </div>
     </section>
 
     <!-- STATS -->
     <div class="container">
-      <div class="stats-row reveal">
-        <div class="stat-item"><span class="stat-number" data-target="15">0</span><span class="stat-label">App</span></div>
-        <div class="stat-item"><span class="stat-number" data-target="120">0</span><span class="stat-label">Partner</span></div>
-        <div class="stat-item"><span class="stat-number" data-target="500">0</span><span class="stat-label">Studenti</span></div>
-        <div class="stat-item"><span class="stat-number" data-target="8">0</span><span class="stat-label">Membri</span></div>
+      <div class="stats-row">
+        <div><span class="stat-num">15+</span><span class="stat-lbl">App Sviluppate</span></div>
+        <div><span class="stat-num">120+</span><span class="stat-lbl">Partner</span></div>
+        <div><span class="stat-num">500+</span><span class="stat-lbl">Studenti</span></div>
+        <div><span class="stat-num">8</span><span class="stat-lbl">Core Team</span></div>
       </div>
     </div>
 
     <!-- ACADEMY -->
-    <section id="academy" class="section-education">
-      <div class="container">
-        <div class="reveal" style="text-align: center;">
-          <span style="color: var(--tertiary);">Education</span>
-          <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Apulian Academy</h2>
+    <section id="academy" class="edu-section container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span style="color:var(--tertiary);">Education</span>
+        <h2 style="font-size:2.5rem;">Apulian Academy</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Alternanza Scuola-Lavoro</h3>
+          <p style="color:var(--text-muted);">Percorsi per scuole superiori e PCTO.</p>
         </div>
-        <div class="edu-grid">
-          <div class="edu-card reveal">
-            <div class="edu-icon">🎓</div><h3>Alternanza Scuola-Lavoro</h3><p style="color: var(--text-muted);">Percorsi PCTO per studenti.</p>
-          </div>
-          <div class="edu-card reveal">
-            <div class="edu-icon">⚡</div><h3>Coding Bootcamp</h3><p style="color: var(--text-muted);">Crea la tua prima Web App.</p>
-          </div>
-          <div class="edu-card reveal">
-            <div class="edu-icon">⛓️</div><h3>Blockchain Dev</h3><p style="color: var(--text-muted);">Diventa sviluppatore Solidity.</p>
-          </div>
+        <div class="edu-card">
+          <div class="edu-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Coding Bootcamp</h3>
+          <p style="color:var(--text-muted);">Dalla teoria alla tua prima Web App in 4 settimane.</p>
+        </div>
+        <div class="edu-card">
+          <div class="edu-icon"><i class="fas fa-link"></i></div>
+          <h3>Blockchain Dev</h3>
+          <p style="color:var(--text-muted);">Master in Solidity e Smart Contracts.</p>
         </div>
       </div>
     </section>
 
     <!-- TEAM CAROUSEL -->
     <section id="team" class="container" style="padding: 4rem 0;">
-      <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="font-size: 2rem;">Il Nostro Team</h2>
-        <p style="color: var(--text-muted);">Vincenzo, Marco Antonio, Marco, Antonio, Mario, Angelo, Alessio, Alfredo</p>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size:2.5rem;">Il Nostro Team</h2>
+        <p style="color:var(--text-muted);">Le persone dietro il progetto</p>
       </div>
-      
-      <div class="team-scroll-wrapper reveal">
-        <!-- MEMBRO 1 -->
+
+      <div class="team-wrapper">
+        <!-- Vincenzo -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/vincenzo.png" onerror="this.src='https://via.placeholder.com/260x300?text=Vincenzo'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Vincenzo" class="team-img" alt="Vincenzo">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Vincenzo</h3><span class="team-role">Founder</span>
-            <div class="social-row">
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <h3>Vincenzo</h3><span class="team-role">Founder</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
         </div>
-        <!-- MEMBRO 2 -->
+
+        <!-- Marco Antonio -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/marcoantonio.png" onerror="this.src='https://via.placeholder.com/260x300?text=Marco+Antonio'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Marco+Antonio" class="team-img" alt="Marco Antonio">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Marco Antonio</h3><span class="team-role">Co-Founder</span>
-            <div class="social-row">
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+            <h3>Marco Antonio</h3><span class="team-role">Co-Founder</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
             </div>
           </div>
         </div>
-        <!-- MEMBRO 3 -->
+
+        <!-- Marco -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/marco.png" onerror="this.src='https://via.placeholder.com/260x300?text=Marco'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Marco" class="team-img" alt="Marco">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Marco</h3><span class="team-role">Dev Lead</span>
-            <div class="social-row">
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-github"></i></a>
-              <a href="LINK_HERE" class="social-btn"><i class="fab fa-telegram"></i></a>
+            <h3>Marco</h3><span class="team-role">Dev Lead</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
             </div>
           </div>
         </div>
-        <!-- MEMBRO 4 -->
+
+        <!-- Antonio -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/antonio.png" onerror="this.src='https://via.placeholder.com/260x300?text=Antonio'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Antonio" class="team-img" alt="Antonio">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Antonio</h3><span class="team-role">Blockchain Expert</span>
-            <div class="social-row"><a href="LINK_HERE" class="social-btn"><i class="fab fa-linkedin-in"></i></a></div>
+            <h3>Antonio</h3><span class="team-role">Blockchain Expert</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
           </div>
         </div>
-        <!-- MEMBRO 5 -->
+
+        <!-- Mario -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/mario.png" onerror="this.src='https://via.placeholder.com/260x300?text=Mario'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Mario" class="team-img" alt="Mario">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Mario</h3><span class="team-role">Marketing</span>
-            <div class="social-row"><a href="LINK_HERE" class="social-btn"><i class="fab fa-instagram"></i></a></div>
+            <h3>Mario</h3><span class="team-role">Marketing</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
           </div>
         </div>
-        <!-- MEMBRO 6 -->
+
+        <!-- Angelo -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/angelo.png" onerror="this.src='https://via.placeholder.com/260x300?text=Angelo'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Angelo" class="team-img" alt="Angelo">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Angelo</h3><span class="team-role">Design</span>
-            <div class="social-row"><a href="LINK_HERE" class="social-btn"><i class="fab fa-dribbble"></i></a></div>
+            <h3>Angelo</h3><span class="team-role">Design</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+            </div>
           </div>
         </div>
-        <!-- MEMBRO 7 -->
+
+        <!-- Alessio -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/alessio.png" onerror="this.src='https://via.placeholder.com/260x300?text=Alessio'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Alessio" class="team-img" alt="Alessio">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Alessio</h3><span class="team-role">Legal</span>
-            <div class="social-row"><a href="LINK_HERE" class="social-btn"><i class="fab fa-linkedin-in"></i></a></div>
+            <h3>Alessio</h3><span class="team-role">Legal</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
           </div>
         </div>
-        <!-- MEMBRO 8 -->
+
+        <!-- Alfredo -->
         <div class="team-card">
-          <div class="team-img-box"><img src="img/alfredo.png" onerror="this.src='https://via.placeholder.com/260x300?text=Alfredo'" class="team-img"></div>
+          <div class="team-img-area">
+            <img src="https://via.placeholder.com/300x350/111/fff?text=Alfredo" class="team-img" alt="Alfredo">
+          </div>
           <div class="team-info">
-            <h3 class="team-name">Alfredo</h3><span class="team-role">Advisor</span>
-            <div class="social-row"><a href="LINK_HERE" class="social-btn"><i class="fab fa-linkedin-in"></i></a></div>
+            <h3>Alfredo</h3><span class="team-role">Advisor</span>
+            <div class="team-social">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT & JSONBIN -->
+    <!-- CONTATTI -->
     <section id="contatti" class="container" style="padding: 4rem 0;">
-      <div class="form-box reveal">
+      <div class="contact-box">
         <h2 style="margin-bottom: 1rem;">Contattaci</h2>
+        <p style="color:var(--text-muted); margin-bottom:1.5rem;">I dati verranno inviati al database.</p>
         <form id="contactForm">
           <input type="text" id="name" class="form-input" placeholder="Nome" required>
           <input type="email" id="email" class="form-input" placeholder="Email" required>
-          <textarea id="message" class="form-input" rows="4" placeholder="Messaggio"></textarea>
-          <button type="submit" class="btn-primary" style="width:100%">Invia</button>
+          <textarea id="message" class="form-input" rows="4" placeholder="Messaggio" required></textarea>
+          <button type="submit" class="btn-nav" style="width:100%; border:none; cursor:pointer;">Invia</button>
         </form>
-        <div id="statusMsg" style="margin-top:1rem; font-size:0.9rem;"></div>
+        <div id="statusMsg" style="margin-top:1rem;"></div>
       </div>
     </section>
 
   </main>
 
-  <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">© 2025 ApulianChain</footer>
+  <footer style="text-align: center; padding: 2rem; border-top:1px solid var(--border-light); margin-top:2rem; color:var(--text-muted);">
+    © 2025 ApulianChain
+  </footer>
 
   <script>
-    // 1. Preloader
-    window.addEventListener('load', () => { 
-      const p = document.getElementById('preloader'); p.style.opacity='0'; 
-      setTimeout(()=>p.style.display='none', 500); 
-    });
-
-    // 2. Typing Effect
-    const words = ["Innovazione.", "Puglia.", "Futuro."]; let i=0, j=0, del=false;
-    function type() {
-      const txt = document.getElementById('typing-text');
-      const w = words[i];
-      txt.textContent = del ? w.substring(0,j-1) : w.substring(0,j+1);
-      j = del ? j-1 : j+1;
-      if(!del && j===w.length){ del=true; setTimeout(type, 2000); }
-      else if(del && j===0){ del=false; i=(i+1)%words.length; setTimeout(type, 500); }
-      else setTimeout(type, del?50:100);
+    // 1. TYPING EFFECT SEMPLIFICATO
+    const words = ["Innovazione", "Puglia", "Community"];
+    let i = 0, timer;
+    function typeWriter() {
+      const el = document.getElementById('typing');
+      if (!el) return;
+      el.textContent = words[i];
+      i = (i + 1) % words.length;
+      setTimeout(typeWriter, 2000);
     }
-    setTimeout(type, 1000);
+    typeWriter();
 
-    // 3. Reveal & Stats Counter
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { 
-        if(e.isIntersecting) {
-          e.target.classList.add('active');
-          // Se è uno stat number, avvia conteggio
-          if(e.target.classList.contains('stat-number')) {
-            const tgt = +e.target.getAttribute('data-target');
-            let curr=0; const inc = tgt/50;
-            const up = () => { curr+=inc; if(curr<tgt){ e.target.innerText=Math.ceil(curr); requestAnimationFrame(up); } else e.target.innerText=tgt+"+"; };
-            up();
-            observer.unobserve(e.target);
-          }
-        }
-      });
-    });
-    document.querySelectorAll('.reveal, .stat-number').forEach(el => observer.observe(el));
-
-    // 4. JSONBIN Logic
-    // CONFIGURA QUI:
-    const BIN_ID = 'TUO_BIN_ID'; 
-    const API_KEY = 'TUA_API_KEY'; 
+    // 2. JSONBIN LOGIC (Configurazione)
+    const BIN_ID = 'TUO_BIN_ID_QUI'; // Es: 64e5f...
+    const API_KEY = 'TUA_API_KEY_QUI'; // Es: $2b$10...
     
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('statusMsg');
-      status.textContent = "Simulazione invio a JSONBin... (Configura API Key nello script)";
-      status.style.color = "var(--primary)";
-      console.log({
+      status.textContent = "Invio in corso...";
+      status.style.color = "#fff";
+
+      const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        msg: document.getElementById('message').value
-      });
-      // Qui inseriresti la fetch reale a https://api.jsonbin.io/v3/b/...
+        message: document.getElementById('message').value,
+        date: new Date().toISOString()
+      };
+
+      // SIMULAZIONE (Rimuovi commenti per attivare fetch reale)
+      console.log("Dati pronti:", formData);
+      
+      /* 
+      // ESEMPIO FETCH JSONBIN
+      try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY
+          },
+          body: JSON.stringify(formData)
+        });
+        if(res.ok) throw new Error("OK");
+      } catch(err) {
+         // ... 
+      }
+      */
+      
+      setTimeout(() => {
+        status.textContent = "Messaggio inviato! (Controlla la console per i dati JSON)";
+        status.style.color = "var(--primary)";
+        e.target.reset();
+      }, 1000);
     });
   </script>
 </body>
