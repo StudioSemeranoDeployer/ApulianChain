@@ -417,12 +417,12 @@
                 // 1. Vai su emailjs.com, crea un account.
                 // 2. Crea un 'Service' (es. Gmail) -> copia SERVICE_ID
                 // 3. Crea un 'Template' -> copia TEMPLATE_ID
-                const SERVICE_ID = 'service_0lbtzl7';   // <--- INCOLLA QUI
-                const TEMPLATE_ID = 'template_ydjbh6z'; // <--- INCOLLA QUI
+                const SERVICE_ID = '0lbtzl7';   // <--- INCOLLA QUI
+                const TEMPLATE_ID = 'ydjbh6z'; // <--- INCOLLA QUI
                 // 4. Assicurati che PUBLIC_KEY sia in <head>
 
                 // Se non hai configurato le chiavi, simulo il successo per demo
-                if(SERVICE_ID === 'service_0lbtzl7') {
+                if(SERVICE_ID === '0lbtzl7') {
                     console.warn("EmailJS non configurato. Simulo invio.");
                     setTimeout(() => { setStatus('success'); setTimeout(() => setStatus('idle'), 4000); }, 1500);
                     return;
